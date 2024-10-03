@@ -5,7 +5,6 @@ inputs:
     description: 'Environment to deploy to'
     required: true
     default: 'dev'
-secrets:
   JFROG_PASSWORD:
     description: 'JFROG password'
     required: true
