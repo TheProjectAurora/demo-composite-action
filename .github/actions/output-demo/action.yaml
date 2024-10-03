@@ -1,5 +1,8 @@
 name: Output demo for composed action
-
+inputs:
+  JFROG_PASSWORD:
+    description: 'JFROG password'
+    required: true
 outputs:
   md5hash: 
     description: "In secure MD5 hash of JFROG_PASSWORD"
