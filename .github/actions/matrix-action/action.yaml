@@ -1,0 +1,21 @@
+name: 'Callabled Workflow'
+description: 'A composite action to print environment and JFROG_PASSWORD'
+inputs:
+  environment:
+    description: 'Environment to deploy to'
+    required: true
+    default: 'dev'
+secrets:
+  JFROG_PASSWORD:
+    description: 'JFROG password'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Print stuff
+      run: |
+        echo "Hello ${{ inputs.environment }}"
+        echo "JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}"
+        echo "${{ secrets.JFROG_PASSWORD }}" | md5sum

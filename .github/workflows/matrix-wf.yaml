@@ -1,0 +1,25 @@
+# Called workflow which inputs are envronment and used as environment, JFROG_PASSWORD secret
+name: Callabled Workflow
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+        description: 'Environment to deploy to'
+        default: 'dev'
+    secrets:
+      JFROG_PASSWORD:
+        required: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Print stuff
+      run: |
+        echo "Hello ${{ inputs.environment }}"
+        echo "JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}"
+        echo "${{ secrets.JFROG_PASSWORD }}" | md5sum
