@@ -1,0 +1,21 @@
+name: Output demo for composed action
+
+outputs:
+  md5hash: 
+    description: "In secure MD5 hash of JFROG_PASSWORD"
+    value: ${{ steps.calculate.outputs.hashofpassword }}
+  
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Calculate MD5 sum from JFROG_PASSWORD
+      id: calculate
+      shell: bash
+      run: |
+        echo "Hello ${{ inputs.environment }}"
+        echo "JFROG_PASSWORD: ${{ inputs.JFROG_PASSWORD }}"
+        echo "hashofpassword=$( echo "${{ inputs.JFROG_PASSWORD }}" | md5sum )" >> $GITHUB_OUTPUT
+        echo "## I'm at $GITHUB_ACTION_PATH and coming from $GITHUB_ACTION_REPOSITORY" >> $GITHUB_STEP_SUMMARY
