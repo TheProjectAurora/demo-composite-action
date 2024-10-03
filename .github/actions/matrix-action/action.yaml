@@ -16,5 +16,5 @@ runs:
     - name: Print stuff
       run: |
         echo "Hello ${{ inputs.environment }}"
-        echo "JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}"
-        echo "${{ secrets.JFROG_PASSWORD }}" | md5sum
+        echo "JFROG_PASSWORD: ${{ inputs.JFROG_PASSWORD }}"
+        echo "${{ inputs.JFROG_PASSWORD }}" | md5sum
